@@ -44,6 +44,7 @@
     "SellRent": 1,
     "Name":"Pearl House",
     "Type":"House",
-    "Price":18000
+    "Price":18000,
+    "Image":"prop-3"
   }
 ]
