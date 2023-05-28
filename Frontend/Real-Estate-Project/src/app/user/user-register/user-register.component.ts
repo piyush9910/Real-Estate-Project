@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/model/user';
 import { AlertifyService } from 'src/app/services/alertify.service';
-// import * as alertify from 'alertifyjs';
+
 @Component({
   selector: 'app-user-register',
   templateUrl: './user-register.component.html',
@@ -14,7 +14,9 @@ export class UserRegisterComponent implements OnInit {
   registerationForm: FormGroup;
   user: User;
   userSubmitted: boolean;
-  constructor(private fb: FormBuilder, private userService: UserService, private alertify : AlertifyService) { }
+  constructor(private fb: FormBuilder,
+              private userService: UserService,
+              private alertify: AlertifyService ) { }
 
   ngOnInit() {
     // this.registerationForm = new FormGroup({
@@ -51,14 +53,18 @@ export class UserRegisterComponent implements OnInit {
     if (this.registerationForm.valid) {
       // this.user = Object.assign(this.user, this.registerationForm.value);
       this.userService.addUser(this.userData());
-      this.registerationForm.reset();
-      this.userSubmitted = false;
-      this.alertify.success("Congrats, you are succesfully registered!");
-  }
-  else{
-    this.alertify.error("Kindly provide the required fields")
+      this.onReset();
+      this.alertify.success('Congrats, you are successfully registered');
+  } else {
+      this.alertify.error('Kindly provide the required fields');
   }
   }
+
+  onReset() {
+    this.userSubmitted = false;
+    this.registerationForm.reset();
+  }
+
 
   userData(): User {
     return this.user = {
